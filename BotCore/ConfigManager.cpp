@@ -83,14 +83,6 @@ void ConfigManager::setActorID(double id) {
     actorID = id;
 }
 
-const std::string &ConfigManager::getCharacterName() const {
-    return characterName;
-}
-
-void ConfigManager::setCharacterName(std::string &name) {
-    characterName = name;
-}
-
 double ConfigManager::getPrintLevel() const {
     return config.at("printlevel").get<double>();
 }
@@ -249,4 +241,16 @@ void ConfigManager::preInit() {
 
 const std::string &ConfigManager::getFilePath() const {
     return path;
+}
+
+unsigned short ConfigManager::getTurnKey() const {
+    return config.at("turnkey").get<unsigned short>();
+}
+
+unsigned short ConfigManager::getSpellKey() const {
+    return config.at("spellkey").get<unsigned short>();
+}
+
+unsigned short ConfigManager::getCreatureKey() const {
+    return config.at("creaturekey").get<unsigned short>();
 }

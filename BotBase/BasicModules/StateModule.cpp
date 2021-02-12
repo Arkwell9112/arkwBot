@@ -7,7 +7,14 @@ void StateModule::doState(bool isFirst) {
         unsigned int arg = actions.at(state).at(actionPos);
         LogManager::getInstance().log(
                 "StateModule: Doing State: " + state + " ActionPos: " + std::to_string(actionPos) + ".", 2);
-        clickPoint = Point(point->getParameters().at(arg * 2), point->getParameters().at(arg * 2 + 1));
+        if (point->getParameters().at(arg).is_array()) {
+            clickPoint = Point(point->getParameters().at(arg).at(0).get<int>(),
+                               point->getParameters().at(arg).at(1).get<int>());
+            isKeybd = false;
+        } else {
+            clickKey = point->getParameters().at(arg).get<unsigned short>();
+            isKeybd = true;
+        }
         actionPos++;
         if (isFirst) {
             new(&clickSecond) Timeout(*this, 2000);
@@ -45,7 +52,11 @@ void StateModule::doOperation(const std::string &argument) {
 
 void StateModule::timeoutCallBack(void *caller) {
     if (caller == &clickFirst || caller == &clickSecond) {
-        ClickManager::click(clickPoint);
+        if (!isKeybd) {
+            ClickManager::click(clickPoint);
+        } else {
+            ClickManager::subKeybd(clickKey);
+        }
         doState(caller == &clickFirst);
     } else if (caller == &error) {
         new(&clickFirst) Timeout(*this, 2000);

@@ -10,7 +10,7 @@
 class StateModule : public WorldPathModuleInterface, public PacketDispatcherInterface, public TimeoutInterface {
 public:
     explicit StateModule(ModuleInterface &_parent) : actionPos(0), point(nullptr), clickPoint(0, 0), parent(_parent),
-                                                     isWaiting(false), _isFirst(true) {
+                                                     isWaiting(false), _isFirst(true), isKeybd(false), clickKey(0) {
         std::string stateName = "Start";
         std::string operatorName = "Init";
         std::string result = "Begin";
@@ -46,6 +46,10 @@ private:
     bool isWaiting;
 
     bool _isFirst;
+
+    bool isKeybd;
+
+    WORD clickKey;
 
     std::string state;
 

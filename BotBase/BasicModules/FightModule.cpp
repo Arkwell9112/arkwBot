@@ -51,11 +51,11 @@ void FightModule::timeoutCallBack(void *caller) {
             state = "Begin";
             isKeyboard = true;
             isRetime = true;
-            clickKey = 0x30 + 2;
+            clickKey = ConfigManager::getInstance().getCreatureKey();
         } else if (state == "Begin") {
             isKeyboard = true;
             isRetime = false;
-            clickKey = 0x30 + 0;
+            clickKey = ConfigManager::getInstance().getTurnKey();
         } else if (state == "Move") {
             count++;
             if (count == ConfigManager::getInstance().getPMCount()) {
@@ -76,7 +76,7 @@ void FightModule::timeoutCallBack(void *caller) {
             state = "SpellEnd";
             isKeyboard = true;
             isRetime = true;
-            clickKey = 0x30 + 1;
+            clickKey = ConfigManager::getInstance().getSpellKey();
         } else if (state == "SpellEnd") {
             count++;
             if (count == ConfigManager::getInstance().getSpellCount()) {
@@ -90,7 +90,7 @@ void FightModule::timeoutCallBack(void *caller) {
         } else if (state == "Turn") {
             isKeyboard = true;
             isRetime = false;
-            clickKey = 0x30 + 0;
+            clickKey = ConfigManager::getInstance().getTurnKey();
         } else if (state == "End") {
             state = "PostEnd";
             isKeyboard = true;

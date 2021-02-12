@@ -34,10 +34,6 @@ public:
 
     void setActorID(double id);
 
-    const std::string &getCharacterName() const;
-
-    void setCharacterName(std::string &name);
-
     double getPrintLevel() const;
 
     unsigned int getMaxWeight() const;
@@ -63,6 +59,12 @@ public:
     unsigned int getPMCount() const;
 
     unsigned int getSpellCount() const;
+
+    unsigned short getTurnKey() const;
+
+    unsigned short getSpellKey() const;
+
+    unsigned short getCreatureKey() const;
 
 private:
     ConfigManager();

@@ -59,3 +59,9 @@ void ClickManager::subClick(const Point &point) {
 void ClickManager::toggleFighting() {
     isFighting = !isFighting;
 }
+
+void ClickManager::subKeybd(WORD key) {
+    if (!isFighting) {
+        keybd(key);
+    }
+}

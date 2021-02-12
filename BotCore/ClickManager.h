@@ -14,6 +14,8 @@ public:
 
     static void toggleFighting();
 
+    static void subKeybd(WORD key);
+
 private:
     static bool isFighting;
 };

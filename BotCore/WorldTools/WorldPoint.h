@@ -14,12 +14,12 @@ public:
 
     const std::string &getAction() const;
 
-    const std::vector<int> &getParameters() const;
+    const json &getParameters() const;
 
 private:
     std::string action;
 
-    std::vector<int> parameters;
+    json parameters;
 };
 
 #endif //ARKWBOT_WORLDPOINT_H
