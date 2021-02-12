@@ -10,7 +10,7 @@
 class MapContextModule : public PacketDispatcherInterface {
 public:
     explicit MapContextModule(ModuleInterface &_parent) : mapID(0), parent(_parent), context(nullptr),
-                                                          inventoryWeight(0) {};
+                                                          inventoryWeight(0), isDead(false) {};
 
     void dispatcherCallBack(Packet &packet) override;
 
@@ -20,6 +20,10 @@ public:
 
     unsigned int getWeight() const;
 
+    void setIsDead();
+
+    bool getIsDead();
+
 private:
     ModuleInterface &parent;
 
@@ -28,6 +32,8 @@ private:
     double mapID;
 
     unsigned int inventoryWeight;
+
+    bool isDead;
 
     MapComplementaryInformationsDataMessage message;
 

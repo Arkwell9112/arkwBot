@@ -16,8 +16,6 @@ public:
 
     static void split(const std::string &input, std::list<std::string> &output, char splitter);
 
-    static unsigned int getPacketDelay();
-
     char *loadFile(std::string &name, int &rsize) const;
 
     bool isIpOK(unsigned int address) const;
@@ -65,8 +63,6 @@ public:
     unsigned int getPMCount() const;
 
     unsigned int getSpellCount() const;
-
-    Point getRevive() const;
 
 private:
     ConfigManager();

@@ -59,8 +59,6 @@ private:
 
     Timeout error;
 
-    Timeout errorCatcher;
-
     Point clickPoint;
 };
 

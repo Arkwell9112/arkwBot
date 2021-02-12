@@ -26,10 +26,6 @@ void ConfigManager::split(const std::string &input, std::list<std::string> &outp
     output.push_back(input.substr(prePos, input.size() - prePos));
 }
 
-unsigned int ConfigManager::getPacketDelay() {
-    return (rand() % 800) + 800;
-}
-
 char *ConfigManager::loadFile(std::string &name, int &rsize) const {
     std::ifstream file;
     file.open(path + "\\" + name, std::ios_base::binary);
@@ -253,8 +249,4 @@ void ConfigManager::preInit() {
 
 const std::string &ConfigManager::getFilePath() const {
     return path;
-}
-
-Point ConfigManager::getRevive() const {
-    return Point(config.at("reviveX").get<int>(), config.at("reviveY").get<int>());
 }

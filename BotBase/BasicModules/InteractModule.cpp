@@ -1,7 +1,6 @@
 #include "InteractModule.h"
 #include "../../BotCore/ConfigManager.h"
 #include "../../BotCore/DofusProtocol/InteractiveElementUpdatedMessage.h"
-#include "../../BotCore/PacketDispatcher/PacketDispatcher.h"
 
 void InteractModule::init(const Element &_element, const Point &_offset) {
     count = 0;

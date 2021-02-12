@@ -16,15 +16,6 @@ unsigned int Packet::getInstanceID() const {
     return instanceID;
 }
 
-void Packet::setRealInstanceID(unsigned int _instanceID) {
-    if (realInstanceID != nullptr) {
-        IDataIO::copyAndInvertData(reinterpret_cast<const char *>(&_instanceID), realInstanceID, 4);
-        instanceID = _instanceID;
-    } else {
-        throw BotException(2);
-    }
-}
-
 unsigned int Packet::getPacketSize() const {
     return packetSize;
 }

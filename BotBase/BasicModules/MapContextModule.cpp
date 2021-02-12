@@ -5,6 +5,7 @@
 #include "../../BotCore/DofusProtocol/CharacterSelectedSuccessMessage.h"
 #include "../../BotCore/ConfigManager.h"
 #include "../../BotCore/PacketDispatcher/PacketDispatcher.h"
+#include "../../BotCore/DofusProtocol/GameActionFightDeathMessage.h"
 
 void MapContextModule::dispatcherCallBack(Packet &packet) {
     if (ConfigManager::getInstance().getPacketName(packet.getPacketID()) == "CurrentMapMessage") {
@@ -48,6 +49,13 @@ void MapContextModule::dispatcherCallBack(Packet &packet) {
     } else if (ConfigManager::getInstance().getPacketName(packet.getPacketID()) == "GameFightStartingMessage") {
         PacketDispatcher::getInstance().addListener(fightModule);
         fightModule.init(getContext());
+    } else if (ConfigManager::getInstance().getPacketName(packet.getPacketID()) == "GameActionFightDeathMessage") {
+        GameActionFightDeathMessage currentMessage;
+        ICustomDataInput input(packet.getPacketSize(), packet.getData());
+        currentMessage.deserialize(input);
+        if (ConfigManager::getInstance().getActorID() == currentMessage.targetId) {
+            isDead = true;
+        }
     }
 }
 
@@ -61,4 +69,16 @@ const MapComplementaryInformationsDataMessage &MapContextModule::getMessage() co
 
 unsigned int MapContextModule::getWeight() const {
     return inventoryWeight;
+}
+
+void MapContextModule::setIsDead() {
+    isDead = true;
+}
+
+bool MapContextModule::getIsDead() {
+    if (isDead) {
+        isDead = false;
+        return true;
+    }
+    return false;
 }

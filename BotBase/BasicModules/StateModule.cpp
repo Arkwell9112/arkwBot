@@ -1,5 +1,4 @@
 #include "StateModule.h"
-#include "../../BotCore/ClickManager.h"
 #include "../../BotCore/ConfigManager.h"
 #include "../../BotCore/LogManager.h"
 
@@ -34,7 +33,6 @@ void StateModule::doOperation(const std::string &argument) {
             error.cancelTimeOut();
         }
         if (state == "End") {
-            errorCatcher.cancelTimeOut();
             isWaiting = false;
             uninit();
         } else {
@@ -51,9 +49,6 @@ void StateModule::timeoutCallBack(void *caller) {
         doState(caller == &clickFirst);
     } else if (caller == &error) {
         new(&clickFirst) Timeout(*this, 2000);
-    } else if (caller == &errorCatcher) {
-        actionPos = 0;
-        doState(false);
     }
 }
 
@@ -69,7 +64,6 @@ void StateModule::init(WorldPath &path, const MapContextModule &contextModule) {
     isWaiting = true;
     state = "Start";
     _isFirst = true;
-    new(&errorCatcher) Timeout(*this, 90000);
     doOperation("Init");
 }
 

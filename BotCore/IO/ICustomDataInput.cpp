@@ -1,6 +1,5 @@
 #include "ICustomDataInput.h"
 #include "../BotException.h"
-#include <limits>
 
 bool ICustomDataInput::readBoolean() {
     isPosOK(getPos() + 1);

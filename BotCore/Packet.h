@@ -17,8 +17,6 @@ public:
 
     unsigned int getInstanceID() const;
 
-    void setRealInstanceID(unsigned int _instanceID);
-
     unsigned int getPacketSize() const;
 
     char *getData() const;

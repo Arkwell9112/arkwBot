@@ -14,7 +14,7 @@ void WorldPathModule::init() {
 void WorldPathModule::moduleCallBack(void *child) {
     if (child == &contextModule && isWaiting) {
         if (!isFirst) {
-            if (!isPos || ConfigManager::getInstance().getRevive() == contextModule.getContext()) {
+            if (!isPos || contextModule.getIsDead()) {
                 path.setPosition(contextModule.getContext());
                 isPos = true;
                 auto it = preModules.begin();
@@ -38,9 +38,10 @@ void WorldPathModule::moduleCallBack(void *child) {
         }
     } else if (child != &contextModule) {
         doPreModule();
-    } else if (child == &contextModule && ConfigManager::getInstance().getRevive() == contextModule.getContext()) {
+    } else if (child == &contextModule && contextModule.getIsDead()) {
         LogManager::getInstance().log("WorldPathModule: New MapContext at Revive.", 1);
         isWaiting = true;
+        contextModule.setIsDead();
         moduleCallBack(&contextModule);
         return;
     }

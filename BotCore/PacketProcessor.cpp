@@ -2,7 +2,6 @@
 #include "PacketDispatcher/PacketDispatcher.h"
 #include "LogManager.h"
 #include "ConfigManager.h"
-#include <string>
 
 PacketProcessor PacketProcessor::singleton = PacketProcessor();
 
@@ -36,9 +35,4 @@ void PacketProcessor::processPackets(unsigned int address, bool isSending, char 
         PacketDispatcher::getInstance().dispatchPacket(*it);
         it++;
     }
-}
-
-unsigned int PacketProcessor::getInstanceID() {
-    globalInstanceID++;
-    return globalInstanceID;
 }

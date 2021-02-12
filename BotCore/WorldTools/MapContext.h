@@ -13,13 +13,11 @@ public:
 
     explicit MapContext(unsigned int _mapID, ICustomDataInput &input);
 
-    unsigned int getMapID() const;
-
     const Element &getElement(unsigned int identifier) const;
 
     const FightPoint &getPoint(unsigned int cellID) const;
 
-    const FightPoint &getAdjacentPoint(const Point &point, unsigned int orientation) const;
+    unsigned int getMapID() const;
 
 private:
     unsigned int mapID;

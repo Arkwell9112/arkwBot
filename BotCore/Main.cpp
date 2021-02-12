@@ -5,7 +5,6 @@
 #include "LockManager.h"
 #include "../BotBase/CollecterFrame.h"
 #include "LogManager.h"
-#include <cstdio>
 #include <iostream>
 
 SEND nsend = nullptr;

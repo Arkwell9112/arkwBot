@@ -1,5 +1,4 @@
 #include "WorldPoint.h"
-#include "../BotException.h"
 
 WorldPoint::WorldPoint(json &input) : Point(0, 0) {
     posX = input.at("posX").get<int>();
