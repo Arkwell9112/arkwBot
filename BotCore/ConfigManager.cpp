@@ -6,7 +6,7 @@ ConfigManager ConfigManager::singleton = ConfigManager();
 
 ConfigManager::ConfigManager()
         : isConfigInit(false), ips(), isIpsInit(false), isPacketsReferenceInit(false), actorID(0),
-          isMapContextsInit(false), halfCellWidth(0), halfCellHeight(0) {
+          isMapContextsInit(false), halfCellWidth(0), halfCellHeight(0), unknown("Unknown") {
     path = std::string(std::getenv("HOMEDRIVE")) +
            std::string(std::getenv("HOMEPATH") + std::string("\\Documents\\ArkwBot"));
 }
@@ -59,7 +59,7 @@ const std::string &ConfigManager::getPacketName(unsigned short id) const {
     try {
         return packetsReference.at(id);
     } catch (std::out_of_range &e) {
-        return packetsReference.at(0);
+        return unknown;
     }
 }
 
@@ -113,11 +113,20 @@ void ConfigManager::getPacketsReference() {
                 isEnd = true;
             }
         }
-
-        packetsReference.insert({0, std::string("UnknownMessage")});
-
         delete[] data;
-
+        fileName = "Types.bin";
+        data = loadFile(fileName, size);
+        input = ICustomDataInput((unsigned int) size, data);
+        while (true) {
+            try {
+                unsigned short id = input.readUnsignedShort();
+                std::string name = input.readUTF();
+                typesReference.insert({id, name});
+            } catch (BotException &e) {
+                break;
+            }
+        }
+        delete[] data;
         isPacketsReferenceInit = true;
     }
 }
@@ -253,4 +262,12 @@ unsigned short ConfigManager::getSpellKey() const {
 
 unsigned short ConfigManager::getCreatureKey() const {
     return config.at("creaturekey").get<unsigned short>();
+}
+
+const std::string &ConfigManager::getTypeName(unsigned short id) const {
+    try {
+        return typesReference.at(id);
+    } catch (std::out_of_range &e) {
+        return unknown;
+    }
 }

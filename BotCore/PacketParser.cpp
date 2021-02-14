@@ -2,6 +2,7 @@
 #include "IO/IDataIO.h"
 #include "IO/ICustomDataInput.h"
 #include "BotException.h"
+#include "ConfigManager.h"
 
 bool PacketParser::equals(unsigned int _address, bool _isSending) const {
     return _address == address && _isSending == isSending;
@@ -35,6 +36,9 @@ void PacketParser::parsePackets(char *buf, int len, std::list<Packet> &list) {
             lastPos = input.getPos();
             unsigned int staticHeader = input.readUnsignedShort();
             unsigned int packetID = staticHeader >> 2;
+            if (ConfigManager::getInstance().getPacketName(packetID) == "Unknown") {
+                input.setPos(input.getSize());
+            }
             unsigned int packetSizeSize = staticHeader & 3;
             unsigned int instanceID = 0;
             char *realInstanceID = nullptr;

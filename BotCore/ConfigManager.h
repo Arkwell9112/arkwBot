@@ -66,6 +66,8 @@ public:
 
     unsigned short getCreatureKey() const;
 
+    const std::string &getTypeName(unsigned short id) const;
+
 private:
     ConfigManager();
 
@@ -105,6 +107,8 @@ private:
 
     std::map<unsigned short, std::string> packetsReference;
 
+    std::map<unsigned short, std::string> typesReference;
+
     std::string characterName;
 
     std::map<unsigned int, MapContext> mapContexts;
@@ -112,6 +116,8 @@ private:
     std::vector<Point> points;
 
     std::map<unsigned int, Collectable> collectables;
+
+    std::string unknown;
 };
 
 #endif //ARKWBOT_CONFIGMANAGER_H
