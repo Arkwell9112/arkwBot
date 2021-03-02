@@ -165,7 +165,7 @@ void ConfigManager::getIps() {
 
 void ConfigManager::getMapContexts() {
     if (!isMapContextsInit) {
-        std::string name("MapData.bin");
+        std::string name("Maps.bin");
         int size = 0;
         char *data = loadFile(name, size);
         ICustomDataInput input(size, data);
