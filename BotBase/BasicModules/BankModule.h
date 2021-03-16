@@ -25,7 +25,7 @@ public:
         actionParams = {2};
         addAction(stateName, actionParams);
         stateName = "Exchange";
-        operatorName = "ExchangeObjectTransfertListFromInvMessage";
+        operatorName = "ExchangeObjectTransfertAllFromInvMessage";
         result = "Exchanged";
         addOperation(stateName, operatorName, result);
         actionParams = {3, 4};
